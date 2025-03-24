@@ -1,0 +1,30 @@
+.appBar {
+  background-color: #000 !important;
+  position: static;
+}
+
+.logo{
+  font-family: var(--font-outfit) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3rem !important;
+  color: #fff !important;
+  text-transform: none;
+  font-size: 25px !important;
+}
+
+.pageLink{
+  font-family: var(--font-outfit) !important;
+  font-weight: 400 !important;
+  color: #fff !important;
+  text-transform: none !important;
+  text-align: center !important;
+  font-size: 16px !important;
+}
+
+
+@media (max-width: 600px) {
+  .pageLink{
+    color: #000 !important;
+  }
+  
+}
