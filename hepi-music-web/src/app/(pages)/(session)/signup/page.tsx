@@ -1,11 +1,14 @@
 import Dashboard from "@/app/components/layout/Dashboard";
-import styles from "./styles/page.module.css";
-import { Box, Typography } from "@mui/material";
+import styles from "../../../styles/page.module.css";
+import { Box } from "@mui/material";
+import SignupForm from "@/app/components/common/forms/Signup";
 
-export default function Page() {
+export default function page() {
   return (
    <Dashboard>
-      <Typography>Sign In</Typography>
+        <Box className={styles.authBox}>
+            <SignupForm />
+        </Box>
    </Dashboard>
   );
 }

@@ -1,6 +1,6 @@
 import Dashboard from "@/app/components/layout/Dashboard";
 import styles from "../../../styles/page.module.css";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import LoginForm from "@/app/components/common/forms/Login";
 
 export default function page() {

@@ -5,9 +5,8 @@ import { Box, Typography } from "@mui/material";
 export default function Home() {
   return (
    <Dashboard>
-      <Typography sx={{color:"#fff"}}>Home</Typography>
       <Box className={styles.authBox}> 
-
+        <Typography sx={{color:"#fff"}}>Home</Typography>
       </Box>
    </Dashboard>
   );

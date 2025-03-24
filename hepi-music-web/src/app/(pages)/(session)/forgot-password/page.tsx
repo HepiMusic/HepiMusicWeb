@@ -1,11 +1,10 @@
 import Dashboard from "@/app/components/layout/Dashboard";
-import styles from "./styles/page.module.css";
-import { Box, Typography } from "@mui/material";
+import ForgotPasswordForm from "@/app/components/common/forms/ForgotPassword";
 
 export default function Page() {
   return (
    <Dashboard>
-      <Typography>Forgot Password</Typography>
+      <ForgotPasswordForm />
    </Dashboard>
   );
 }
