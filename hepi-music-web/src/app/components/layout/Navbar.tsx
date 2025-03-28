@@ -1,149 +1,116 @@
-"use client"
-import styles from "../../styles/navbar.module.css"
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+"use client";
+import styles from "../../styles/navbar.module.css";
+import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import AlbumIcon from "@mui/icons-material/Album";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import Link from "next/link";
 import TITLE from "@/app/utils/constants";
 
-const pages = ['Library', 'Charts', 'Albums', 'Favorites', 'Trending'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pageObjects = [
+  { name: "Library", icon: <VideoLibraryIcon />, path: "/library" },
+  { name: "Charts", icon: <ShowChartIcon />, path: "/charts" },
+  { name: "Albums", icon: <AlbumIcon />, path: "/albums" },
+  { name: "Favorites", icon: <FavoriteBorderIcon />, path: "/favorites" },
+  { name: "Trending", icon: <TrendingUpIcon />, path: "/trending" },
+];
 
-function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+const ResponsiveAppBar = () => {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const pathname = usePathname();
+  const authenticated = false; // Set based on user authentication state
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
+  const handleCloseUserMenu = () => setAnchorElUser(null);
 
   return (
     <AppBar className={styles.appBar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography 
-            className={styles.logo}
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-            }}
-          >
+          <Link href="/">
+          <Typography className={styles.logo} variant="h6" noWrap>
             {TITLE}
           </Typography>
+          </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+          {/* Mobile Navigation */}
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton size="large" onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography className={styles.pageLink}>{page}</Typography>
+            <Menu anchorEl={anchorElNav} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu}>
+              {pageObjects.map(({ name, path }) => (
+                <MenuItem key={name} onClick={handleCloseNavMenu}>
+                  <Link href={path} className={pathname === path ? styles.navbarButtonActive : ""}>
+                    <Typography>{name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Typography
-            className={styles.logo}
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-            }}
-          >
-            {TITLE}
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, display: 'block' }}
-              >
-                  <Typography className={styles.pageLink}>{page}</Typography>
-                </Button>
-            ))}
+
+          {/* Desktop Navigation */}
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pageObjects.map(({ name, icon, path }) => {
+              const isActive = pathname === path;
+              return (
+                <Link href={path} key={name} className={isActive ? styles.navbarButtonActive : ""}>
+                  <Button onClick={handleCloseNavMenu} className={styles.navbarButton}>
+                    <Box className={styles.navbarButtonBox}>
+                      {React.cloneElement(icon, {
+                        className: isActive ? styles.navbarIconsActive : styles.navbarIcons,
+                      })}
+                      <Typography className={isActive ? styles.pageLinkActive : styles.pageLink}>{name}</Typography>
+                    </Box>
+                  </Button>
+                </Link>
+              );
+            })}
           </Box>
+
+          {/* User Profile Menu or Login */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            {authenticated ? (
+              <>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                </Tooltip>
+                <Menu sx={{ mt: "45px" }} anchorEl={anchorElUser} open={Boolean(anchorElUser)} onClose={handleCloseUserMenu}>
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography>{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
+            ) : (
+              <Box sx={{display:"flex", gap:"5px"}}>
+                <Link href="/login">
+                  <Button className={styles.callToActionButton}>Login</Button>
+                </Link>
+                <Link href="/signup">
+                  <Button className={styles.callToActionButton}>Signup</Button>
+                </Link>
+              </Box>
+            )}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
+
 export default ResponsiveAppBar;
