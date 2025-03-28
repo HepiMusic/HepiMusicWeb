@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import styles from "../../../styles/page.module.css";
 
 interface CustomButtonProps {
@@ -8,7 +8,9 @@ interface CustomButtonProps {
 export default function SubmitButton({ label}: CustomButtonProps) {
   return (
     <Button className={styles.customButton}>
-        {label}
+        <Typography className={`${styles.buttonFont} ${styles.buttonDark}`}>
+          {label}
+        </Typography>
     </Button>
   );
 }
