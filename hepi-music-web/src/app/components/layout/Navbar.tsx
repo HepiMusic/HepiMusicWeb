@@ -10,14 +10,15 @@ import AlbumIcon from "@mui/icons-material/Album";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import Link from "next/link";
-import TITLE from "@/app/utils/constants";
+import Image from "next/image";
+
 
 const pageObjects = [
-  { name: "Library", icon: <VideoLibraryIcon />, path: "/library" },
-  { name: "Charts", icon: <ShowChartIcon />, path: "/charts" },
-  { name: "Albums", icon: <AlbumIcon />, path: "/albums" },
-  { name: "Favorites", icon: <FavoriteBorderIcon />, path: "/favorites" },
-  { name: "Trending", icon: <TrendingUpIcon />, path: "/trending" },
+  { name: "Library", icon: <VideoLibraryIcon sx={{width:"20px",height:"20"}}/>, path: "/library" },
+  { name: "Charts", icon: <ShowChartIcon sx={{width:"20px",height:"20"}}/>, path: "/charts" },
+  { name: "Albums", icon: <AlbumIcon sx={{width:"20px",height:"20"}}/>, path: "/albums" },
+  { name: "Favorites", icon: <FavoriteBorderIcon sx={{width:"20px",height:"20"}}/>, path: "/favorites" },
+  { name: "Trending", icon: <TrendingUpIcon sx={{width:"20px",height:"20"}}/>, path: "/trending" },
 ];
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -39,9 +40,7 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/">
-          <Typography className={styles.logo} variant="h6" noWrap>
-            {TITLE}
-          </Typography>
+            <Image src="/images/hepi_logo.jpg" height={60} width={60} alt="hepi logo"/>
           </Link>
 
           {/* Mobile Navigation */}
@@ -99,10 +98,10 @@ const ResponsiveAppBar = () => {
             ) : (
               <Box sx={{display:"flex", gap:"5px"}}>
                 <Link href="/login">
-                  <Button className={styles.callToActionButton}>Login</Button>
+                  <Button className="callToActionButton">Login</Button>
                 </Link>
                 <Link href="/signup">
-                  <Button className={styles.callToActionButton}>Signup</Button>
+                  <Button className="callToActionButton">Signup</Button>
                 </Link>
               </Box>
             )}

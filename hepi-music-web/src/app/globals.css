@@ -45,6 +45,46 @@ a {
 }
 
 
+.callToActionButton {
+  background-color: var(--Yellow2) !important;
+  text-transform: none !important;
+  color: var(--yellow1) !important;
+  font-family: var(--font-outfit) !important;
+}
+
+.spinner {
+  color: var(--yellow1) !important;
+}
+
+
+.hero {
+  max-height: 70vh;
+  border: 1px var(--borderColor1) solid;
+  background-color: #000 !important;
+  border-radius: 27px !important; 
+  padding: 20px !important;
+}
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+  border-radius: 8px;
+  border: 1px solid #2E2E2E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
 
 @media (prefers-color-scheme: dark) {
   html {

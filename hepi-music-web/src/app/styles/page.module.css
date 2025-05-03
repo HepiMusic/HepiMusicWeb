@@ -195,8 +195,7 @@ a.secondary {
   font-size: 16px;
 }
 
-.authBox {
-}
+
 
 .dashboard {
   padding: 100px 40px;
@@ -242,7 +241,7 @@ border: 1px solid var(--borderColor1);
   gap: 25px !important; 
   height: auto;
   width: 100%;
-  
+  padding:10px
 }
 
 .customFieldBox {
@@ -288,32 +287,226 @@ border: 1px solid var(--borderColor1);
 }
 
 
-
-
-/* Text Field styles */
-
-.customTextField .MuiOutlinedInput-root {
-  /* border-radius: 12px !important; */
+.pageNotFoundFontH1 {
+  font-family: var(--font-outfit) !important;
+  color: var(--yellow1) !important;
+  font-size: 50px !important;
 }
 
-.customTextField .MuiOutlinedInput-root fieldset {
-  /* border-color: white !important; */
+.pageNotFoundFontH2 {
+  font-family: var(--font-outfit) !important;
+  color: var(--yellow1) !important ;
+  font-size: 20px !important;
 }
 
-/* .customTextField .MuiInputBase-input {
-  color: white !important;
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* border: 1px solid yellow; */
+  min-height: 60vh;
 }
 
-.customTextField .MuiInputBase-input::placeholder {
-  color: white !important;
-  opacity: 1 !important;
+.layer {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* border: 1px solid green; */
 }
 
-.customTextField .MuiInputLabel-root {
-  color: white !important;
-} */
+.layerTop {
+  /* border: 1px solid green; */
+  min-height: 50px;
+}
 
-/* Text Field styles */
+.layerTopIntroText {
+  font-family: var(--font-outfit) !important;
+  color:#fff !important ;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+.layerTopIntroTextInfo {
+  font-family: var(--font-outfit) !important;
+  color:#fff !important ;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+
+}
+
+.songCard{
+  /* border: 1px solid red; */
+  text-align: left;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: auto;
+}
+
+.gridContainer {
+  flex-grow: 1; /* This pushes the footer down */
+}
+
+.mediaPlayer {
+  width: 100%;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.8); /* Dark background */
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: sticky;
+  bottom: 0;
+  border: 1px solid var(--borderColor1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.mediaPlayerBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.mediaPlayerAlbum {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 25%;
+}
+
+
+.artistName {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.mediaPlayerControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 15%;
+
+}
+
+.mediaPlayerExtras {
+  display: flex;
+  align-items: center;
+}
+
+.mediaPlayerProgressBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 35%;
+  justify-content: center;
+}
+
+
+.songCardLeft {
+  border-radius: 15px !important;
+  background-color: var(--yellow1) !important;
+}
+
+
+.songCardRight {
+  border-radius: 15px !important;
+  background-color: #252525  !important;
+  color: #ffff !important;
+  height: auto;
+}
+
+.songCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px !important;
+}
+
+
+.songCardContentRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px !important;
+}
+.songCardContentHero {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.songIntro {
+  font-family: var(--font-outfit) !important;
+  color:#000 !important ;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+}
+
+.songTitle {
+  font-family: var(--font-outfit) !important;
+  color:#000 !important ;
+  font-size: 30px !important;
+  font-weight: 700 !important;
+}
+
+.songMusicCard{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.songMusicBoxTitle{
+  font-family: var(--font-outfit) !important;
+  color:#fff !important ;
+  font-size: 20 !important;
+  font-weight: 600 !important;
+}
+
+
+.songMusicSeeMore{
+  font-family: var(--font-outfit) !important;
+  color:var( --borderYellow) !important ;
+  font-size: 20 !important;
+  font-weight: 400 !important;
+}
+
+
+.musicListCard{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.musicCard{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--borderColor1);
+  border-radius: 0px;
+  width: 100%;
+  align-items: center;
+  height: 60px;
+  padding: 5px  0px;
+}
+
+
+.musicCardInner{
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {

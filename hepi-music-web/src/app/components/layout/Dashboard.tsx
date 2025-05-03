@@ -1,5 +1,5 @@
 import styles from "../../styles/page.module.css"
-import { Box } from '@mui/material';
+import { Box, Card, CardContent, Container } from '@mui/material';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -8,7 +8,13 @@ export default function Dashboard({children}: Readonly<{children: React.ReactNod
   return (
     <Box className={styles.dashboard}>
         <Navbar />
-            {children}
+        <Container maxWidth="xl">
+          <Card className="hero">
+            <CardContent>
+              {children}
+            </CardContent>
+          </Card>
+        </Container>
         <Footer />
     </Box>
   );
