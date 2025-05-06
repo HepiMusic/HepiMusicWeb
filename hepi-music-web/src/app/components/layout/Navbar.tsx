@@ -96,7 +96,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0, ml: "auto", display: "flex", alignItems: "center" }}>
             {authenticated ? (
               <Box sx={{display:"flex", gap:"5px"}}>
-                <Link href="/dashboard">
+                <Link href="/admin">
                   <Button className="callToActionButton">Admin</Button>
                 </Link>
                 <Button className="callToActionButton" onClick={handleLogout}>Logout</Button>

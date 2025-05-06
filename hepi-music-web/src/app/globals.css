@@ -61,10 +61,18 @@ a {
   max-height: 70vh;
   border: 1px var(--borderColor1) solid;
   background-color: #000 !important;
-  border-radius: 27px !important; 
-  padding: 20px !important;
+  border-radius: 8px !important; 
+  padding: 10px !important;
 }
 
+
+.adminColumn {
+  min-height: 60vh;
+  border: 1px var(--borderColor1) solid;
+  background-color: #000 !important;
+  border-radius: 8px !important; 
+  padding: 10px !important;
+}
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
