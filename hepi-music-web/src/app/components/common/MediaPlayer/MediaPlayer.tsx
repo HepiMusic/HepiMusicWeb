@@ -12,12 +12,18 @@ import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
 import VolumeOffOutlinedIcon from "@mui/icons-material/VolumeOffOutlined";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import ReplayIcon from "@mui/icons-material/Replay";
+import { Song } from "@/app/types";
 
-export default function MediaPlayer() {
+interface MediaPlayerProps {
+  song: Song | null;
+}
+
+export default function MediaPlayer({ song }: MediaPlayerProps) {
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [duration] = useState(240); // Track duration in seconds (4 min)
-  const [volume, setVolume] = useState(50); // Volume level (0-100)
+  const [duration] = useState(240); // Simulated duration
+  const [volume, setVolume] = useState(50);
   const [isShuffling, setIsShuffling] = useState(false);
   const [isRepeating, setIsRepeating] = useState(false);
 
@@ -28,7 +34,6 @@ export default function MediaPlayer() {
         setProgress((prev) => (prev < duration ? prev + 1 : 0));
       }, 1000);
     }
-  
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -44,15 +49,15 @@ export default function MediaPlayer() {
         {/* Album Cover & Song Info */}
         <Box className={styles.mediaPlayerAlbum}>
           <Image
-            src="/images/album.jpeg"
-            alt="Soothing song"
-            width={60} 
-            height={60} 
+            src={song?.thumbnailPath || "/images/album.jpeg"}
+            alt={song?.title || "" }
+            width={60}
+            height={60}
             objectFit="cover"
           />
           <Box>
-            <Typography className={styles.songTitle}>Soothing Song</Typography>
-            <Typography className={styles.artistName}>Artist Name</Typography>
+            <Typography className={styles.songTitle}>{song?.title}</Typography>
+            <Typography className={styles.artistName}>{song?.artist.name}</Typography>
           </Box>
           <IconButton>
             <FavoriteBorderIcon sx={{ color: "white" }} />
@@ -129,7 +134,7 @@ export default function MediaPlayer() {
   );
 }
 
-// Helper function to format time (mm:ss)
+// Helper function to format time
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;

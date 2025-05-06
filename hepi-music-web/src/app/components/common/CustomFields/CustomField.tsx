@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import styles from "../../../styles/page.module.css";
 import { Box, TextField } from "@mui/material";
 
@@ -5,15 +6,19 @@ interface CustomFieldProps {
   label?: string;
   type: string;
   placeholder?: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function CustomField({ label, type, placeholder }: CustomFieldProps) {
+export default function CustomField({ label, type, placeholder, value, onChange }: CustomFieldProps) {
   return (
     <Box className={styles.customFieldBox}>
       <TextField
         placeholder={placeholder}
         type={type}
         label={label}
+        value={value}
+        onChange={onChange}
         variant="outlined"
         className={styles.customTextField}
         InputLabelProps={{
@@ -28,9 +33,9 @@ export default function CustomField({ label, type, placeholder }: CustomFieldPro
         InputProps={{
           sx: {
             "& .MuiOutlinedInput-root": {
-              borderRadius: "12px !important", // ✅ Ensures border radius
+              borderRadius: "12px !important",
               "& fieldset": {
-                borderRadius: "12px !important", // ✅ Ensures rounded border
+                borderRadius: "12px !important",
                 borderColor: "#2E2E2E !important",
               },
               "&:hover fieldset": {
@@ -42,7 +47,7 @@ export default function CustomField({ label, type, placeholder }: CustomFieldPro
               },
             },
             "& .MuiOutlinedInput-notchedOutline": {
-              borderRadius: "12px !important", // ✅ Fix for notch outline
+              borderRadius: "12px !important",
               borderColor: "#2E2E2E !important",
             },
             "& input": {
@@ -55,7 +60,6 @@ export default function CustomField({ label, type, placeholder }: CustomFieldPro
             },
           },
         }}
-        
         sx={{
           "& label.Mui-focused": {
             color: "#FFFFFF",

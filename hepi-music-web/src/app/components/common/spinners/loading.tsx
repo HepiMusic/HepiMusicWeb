@@ -12,7 +12,7 @@ export default function Spinner({ size = 50}: SpinnerProps) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "30vh",
       }}
     >
       <CircularProgress size={size} className="spinner"/>

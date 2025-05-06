@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSearchField from "./components/common/CustomFields/CustomSearchField";
 import Dashboard from "./components/layout/Dashboard";
 import styles from "./styles/page.module.css";
@@ -7,24 +7,39 @@ import { Box, Link, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import MediaPlayer from "./components/common/MediaPlayer/MediaPlayer";
+import { Song } from "./types";
+import InfoCard from "./components/common/ui/InfoCard";
+import Spinner from "./components/common/spinners/loading";
 
 export default function Page() {
-  const allSongs = [
-    { id: "1", title: "Soothing", avatar: "/images/album.jpeg" },
-    { id: "2", title: "Chill Vibes", avatar: "/images/album.jpeg" },
-    { id: "3", title: "Upbeat Energy", avatar: "/images/album.jpeg" },
-    { id: "4", title: "Relax & Unwind", avatar: "/images/album.jpeg" },
-    { id: "5", title: "Focus Mode", avatar: "/images/album.jpeg" },
-    { id: "6", title: "Party Night", avatar: "/images/album.jpeg" },
-  ];
-
+  const [allSongs, setAllSongs] = useState<Song[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    async function fetchSongs() {
+      try {
+        setLoading(true);
+        const res = await fetch(
+          "https://music-backend-production-99a.up.railway.app/api/v1/songs?page=0&size=20"
+        );
+        const data = await res.json();
+        setAllSongs(data?.content || []);
+      } catch (error) {
+        console.error("Failed to fetch songs:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
   
-  // Filter songs based on search input
+    fetchSongs();
+  }, []);
+  
+
   const filteredSongs = allSongs.filter((song) =>
     song.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   return (
     <Dashboard>
       <Box className={styles.home} sx={{padding:"0px"}}>
@@ -50,102 +65,54 @@ export default function Page() {
 
           {/* Songs box */}
           <Box sx={{ height: "600px", overflowY: "auto", paddingRight: "10px" }}>
-            {/* Songs Grid */}
+            {/* Suggested Singers */}
             <Box className={styles.gridContainer} sx={{ mt: 3 }}>
-              <Grid container spacing={3}>
-                {filteredSongs.map((song) => (
-                  <Grid item xs={6} sm={4} md={2} key={song.id}>
-                    <Link key={song.id} href={`/songs/${song.id}`}>
-                      <Box className={styles.songCard}>
-                        <Box sx={{ borderRadius: "8px", overflow: "hidden", height: "auto" }}>
-                          <Image
-                            src={song.avatar}
-                            alt={song.title}
-                            width={200}
-                            height={210}
-                            layout="responsive"
-                            objectFit="cover"
-                          />
-                        </Box>
-                        <Typography
-                          sx={{ mt: 1, fontWeight: "bold", color: "#fff", textAlign: "center" }}
-                        >
-                          {song.title}
-                        </Typography>
-                      </Box>
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
-              {filteredSongs.length === 0 && (
-                <Typography sx={{ color: "white", textAlign: "center", mt: 2 }}>
-                  No songs found.
-                </Typography>
+              { loading && (
+                <Spinner />
               )}
-            </Box>
+              {!loading && filteredSongs.length === 0 ? (
+                <Box className={styles.centerYX}>
+                  <InfoCard
+                    title="No songs found"
+                    description="Try searching with a different keyword or check back later."
+                  />
+                </Box>
+              ) : (
+                <Grid container spacing={3}>
+                  {filteredSongs.map((song) => (
+                    <Grid item xs={6} sm={4} md={2} key={song.songId}>
+                      <Link href={`/songs/${song.songId}`}>
+                        <Box className={styles.songCard}>
+                          <Box sx={{ borderRadius: "8px", overflow: "hidden", height: "auto" }}>
+                            <Image
+                              src={song.thumbnailPath || "/images/album.jpeg"}
+                              alt={song.title}
+                              width={200}
+                              height={210}
+                              layout="responsive"
+                              objectFit="cover"
+                            />
+                          </Box>
+                          <Typography
+                            sx={{ mt: 1, fontWeight: "bold", color: "#fff", textAlign: "center" }}
+                          >
+                            {song.title}
+                          </Typography>
+                        </Box>
+                      </Link>
+                    </Grid>
+                  ))}
+                </Grid>
+              )}
 
-            {/* Suggested Singers */}
-            <Box className={styles.gridContainer} sx={{ mt: 3 }}>
-              <Typography color="white">Suggested Singers</Typography>
-              <Grid container spacing={3}>
-                {filteredSongs.map((song) => (
-                  <Grid item xs={6} sm={4} md={2} key={song.id}>
-                    <Link key={song.id} href={`/songs/${song.id}`}>
-                      <Box className={styles.songCard}>
-                        <Box sx={{ borderRadius: "8px", overflow: "hidden", height: "auto" }}>
-                          <Image
-                            src={song.avatar}
-                            alt={song.title}
-                            width={200}
-                            height={210}
-                            layout="responsive"
-                            objectFit="cover"
-                          />
-                        </Box>
-                        <Typography
-                          sx={{ mt: 1, fontWeight: "bold", color: "#fff", textAlign: "center" }}
-                        >
-                          {song.title}
-                        </Typography>
-                      </Box>
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-            {/* Suggested Singers */}
-            <Box className={styles.gridContainer} sx={{ mt: 3 }}>
-              <Typography color="white">Suggested Singers</Typography>
-              <Grid container spacing={3}>
-                {filteredSongs.map((song) => (
-                  <Grid item xs={6} sm={4} md={2} key={song.id}>
-                    <Link key={song.id} href={`/songs/${song.id}`}>
-                      <Box className={styles.songCard}>
-                        <Box sx={{ borderRadius: "8px", overflow: "hidden", height: "auto" }}>
-                          <Image
-                            src={song.avatar}
-                            alt={song.title}
-                            width={200}
-                            height={210}
-                            layout="responsive"
-                            objectFit="cover"
-                          />
-                        </Box>
-                        <Typography
-                          sx={{ mt: 1, fontWeight: "bold", color: "#fff", textAlign: "center" }}
-                        >
-                          {song.title}
-                        </Typography>
-                      </Box>
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
+             
             </Box>
           </Box>
         </Box>
       </Box>
-      <MediaPlayer />
+      {filteredSongs.length > 0 && (
+       <MediaPlayer song={filteredSongs[0]} />
+      )}
     </Dashboard>
   );
 }

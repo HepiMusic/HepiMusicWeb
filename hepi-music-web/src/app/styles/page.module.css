@@ -451,7 +451,7 @@ border: 1px solid var(--borderColor1);
 
 .songTitle {
   font-family: var(--font-outfit) !important;
-  color:#000 !important ;
+  color:#fff !important ;
   font-size: 30px !important;
   font-weight: 700 !important;
 }
@@ -506,6 +506,26 @@ border: 1px solid var(--borderColor1);
     justify-content: space-between;
 }
 
+.inforCard {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 2 !important;
+  border: 1px var(--borderColor1) solid !important;
+  background-color: #000 !important;
+  border-radius: 12px !important; 
+
+}
+
+.centerYX  {
+  display: flex !important;
+  flex-direction: column!important;
+  justify-content: center!important;
+  align-items: center!important;
+  width: 100%!important;
+  height: auto!important;
+}
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

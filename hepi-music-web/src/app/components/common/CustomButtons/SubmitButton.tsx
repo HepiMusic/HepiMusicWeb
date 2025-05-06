@@ -3,14 +3,17 @@ import styles from "../../../styles/page.module.css";
 
 interface CustomButtonProps {
   label?: string;
+  onClick?: () => void;
+  disabled?: boolean; 
+
 }
 
-export default function SubmitButton({ label}: CustomButtonProps) {
+export default function SubmitButton({ label, onClick }: CustomButtonProps) {
   return (
-    <Button className={styles.customButton}>
-        <Typography className={`${styles.buttonFont} ${styles.buttonDark}`}>
-          {label}
-        </Typography>
+    <Button onClick={onClick} className={styles.customButton}>
+      <Typography className={`${styles.buttonFont} ${styles.buttonDark}`}>
+        {label}
+      </Typography>
     </Button>
   );
 }
