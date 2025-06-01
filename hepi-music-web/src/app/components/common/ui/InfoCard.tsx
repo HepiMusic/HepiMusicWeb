@@ -19,20 +19,7 @@ export default function InfoCard({
   loading = false,
 }: InfoCardProps) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        padding: 2,
-        border:"1px solid #2E2E2E",
-        borderRadius: "12px",
-        width: "100%",
-        height: "auto"
-      }}
-    >
+    <Box className="customBox">
       {loading ? (
         <CircularProgress className="spinner" />
       ) : (

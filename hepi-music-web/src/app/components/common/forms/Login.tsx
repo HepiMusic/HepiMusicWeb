@@ -42,7 +42,7 @@ export default function LoginForm() {
       if (response.ok && data.access_token && data.refresh_token) {
         setTokens(data.access_token, data.refresh_token);
         setTimeout(() => {
-          router.push("/"); // changed from /login
+          router.push("/"); 
         }, 1000);
       } else {
         const message = data?.message || "Login failed. Please check your credentials.";

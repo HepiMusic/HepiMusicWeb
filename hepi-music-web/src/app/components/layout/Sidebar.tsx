@@ -27,7 +27,6 @@ const links = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-console.log("pathname>>>>", pathname)
   return (
     <List className="adminColumn">
       {links.map(({ text, href, icon }) => {

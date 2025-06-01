@@ -52,6 +52,11 @@ a {
   font-family: var(--font-outfit) !important;
 }
 
+.yellowText {
+  color: var(--yellow1) !important;
+  font-family: var(--font-outfit) !important;
+}
+
 .spinner {
   color: var(--yellow1) !important;
 }
@@ -73,6 +78,33 @@ a {
   border-radius: 8px !important; 
   padding: 10px !important;
 }
+
+
+.customBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 16px; /* 2 * 8px (MUI spacing unit) */
+  border: 1px solid #2E2E2E;
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+}
+
+.customBoxLeftAlign {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border: 1px solid #2E2E2E;
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
