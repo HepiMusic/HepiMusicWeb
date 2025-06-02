@@ -8,7 +8,7 @@ import SubmitButton from "../CustomButtons/SubmitButton";
 import { useSession } from "@/app/context/SessionContext";
 
 interface ArtistFormData {
-  fullName: string;
+  name: string;
   biography: string;
   thumbnailUrl: string;
   countryId: string;
@@ -20,7 +20,7 @@ export default function CreateArtistForm() {
   const router = useRouter();
 
   const [formData, setFormData] = useState<ArtistFormData>({
-    fullName: "",
+    name: "",
     biography: "",
     thumbnailUrl: "",
     countryId: "",
@@ -38,7 +38,7 @@ export default function CreateArtistForm() {
     setError("");
     setSuccess("");
 
-    if (!formData.fullName || !formData.thumbnailUrl) {
+    if (!formData.name || !formData.thumbnailUrl) {
       setError("Please fill all required fields.");
       return;
     }
@@ -80,8 +80,8 @@ export default function CreateArtistForm() {
             label="Full Name"
             placeholder="John Doe"
             type="text"
-            value={formData.fullName}
-            onChange={handleChange("fullName")}
+            value={formData.name}
+            onChange={handleChange("name")}
           />
           <CustomField
             label="Biography"
